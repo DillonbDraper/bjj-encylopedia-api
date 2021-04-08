@@ -124,4 +124,63 @@ defmodule BJJ.CategoriesTest do
       assert %Ecto.Changeset{} = Categories.change_subposition(subposition)
     end
   end
+
+  describe "orientations" do
+    alias BJJ.Categories.Orientation
+
+    @valid_attrs %{dominant: true}
+    @update_attrs %{dominant: false}
+    @invalid_attrs %{dominant: nil}
+
+    def orientation_fixture(attrs \\ %{}) do
+      {:ok, orientation} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Categories.create_orientation()
+
+      orientation
+    end
+
+    test "list_orientations/0 returns all orientations" do
+      orientation = orientation_fixture()
+      assert Categories.list_orientations() == [orientation]
+    end
+
+    test "get_orientation!/1 returns the orientation with given id" do
+      orientation = orientation_fixture()
+      assert Categories.get_orientation!(orientation.id) == orientation
+    end
+
+    test "create_orientation/1 with valid data creates a orientation" do
+      assert {:ok, %Orientation{} = orientation} = Categories.create_orientation(@valid_attrs)
+      assert orientation.dominant == true
+    end
+
+    test "create_orientation/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Categories.create_orientation(@invalid_attrs)
+    end
+
+    test "update_orientation/2 with valid data updates the orientation" do
+      orientation = orientation_fixture()
+      assert {:ok, %Orientation{} = orientation} = Categories.update_orientation(orientation, @update_attrs)
+      assert orientation.dominant == false
+    end
+
+    test "update_orientation/2 with invalid data returns error changeset" do
+      orientation = orientation_fixture()
+      assert {:error, %Ecto.Changeset{}} = Categories.update_orientation(orientation, @invalid_attrs)
+      assert orientation == Categories.get_orientation!(orientation.id)
+    end
+
+    test "delete_orientation/1 deletes the orientation" do
+      orientation = orientation_fixture()
+      assert {:ok, %Orientation{}} = Categories.delete_orientation(orientation)
+      assert_raise Ecto.NoResultsError, fn -> Categories.get_orientation!(orientation.id) end
+    end
+
+    test "change_orientation/1 returns a orientation changeset" do
+      orientation = orientation_fixture()
+      assert %Ecto.Changeset{} = Categories.change_orientation(orientation)
+    end
+  end
 end

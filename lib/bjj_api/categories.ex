@@ -199,4 +199,100 @@ defmodule BJJ.Categories do
   def change_subposition(%Subposition{} = subposition, attrs \\ %{}) do
     Subposition.changeset(subposition, attrs)
   end
+
+  alias BJJ.Categories.Orientation
+
+  @doc """
+  Returns the list of orientations.
+
+  ## Examples
+
+      iex> list_orientations()
+      [%Orientation{}, ...]
+
+  """
+  def list_orientations do
+    Repo.all(Orientation)
+  end
+
+  @doc """
+  Gets a single orientation.
+
+  Raises `Ecto.NoResultsError` if the Orientation does not exist.
+
+  ## Examples
+
+      iex> get_orientation!(123)
+      %Orientation{}
+
+      iex> get_orientation!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_orientation!(id), do: Repo.get!(Orientation, id)
+
+  @doc """
+  Creates a orientation.
+
+  ## Examples
+
+      iex> create_orientation(%{field: value})
+      {:ok, %Orientation{}}
+
+      iex> create_orientation(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_orientation(attrs \\ %{}) do
+    %Orientation{}
+    |> Orientation.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a orientation.
+
+  ## Examples
+
+      iex> update_orientation(orientation, %{field: new_value})
+      {:ok, %Orientation{}}
+
+      iex> update_orientation(orientation, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_orientation(%Orientation{} = orientation, attrs) do
+    orientation
+    |> Orientation.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a orientation.
+
+  ## Examples
+
+      iex> delete_orientation(orientation)
+      {:ok, %Orientation{}}
+
+      iex> delete_orientation(orientation)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_orientation(%Orientation{} = orientation) do
+    Repo.delete(orientation)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking orientation changes.
+
+  ## Examples
+
+      iex> change_orientation(orientation)
+      %Ecto.Changeset{data: %Orientation{}}
+
+  """
+  def change_orientation(%Orientation{} = orientation, attrs \\ %{}) do
+    Orientation.changeset(orientation, attrs)
+  end
 end
