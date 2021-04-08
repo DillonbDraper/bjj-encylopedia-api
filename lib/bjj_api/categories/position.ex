@@ -5,7 +5,6 @@ defmodule BJJ.Categories.Position do
   schema "positions" do
     field :name, :string
 
-    timestamps()
   end
 
   @doc false

@@ -5,7 +5,6 @@ defmodule BJJ.Repo.Migrations.CreatePositions do
     create table(:positions) do
       add :name, :string
 
-      timestamps()
     end
 
   end
