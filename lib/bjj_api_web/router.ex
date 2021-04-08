@@ -8,6 +8,8 @@ defmodule BJJWeb.Router do
   scope "/api", BJJWeb do
     pipe_through :api
     resources "/users", UserController, except: [:new, :edit]
+    resources "/positions", PositionController, except: [:new, :edit]
+    resources "/subpositions", SubpositionController, except: [:new, :edit]
     post "/users/sign_in", UserController, :sign_in
 
   end

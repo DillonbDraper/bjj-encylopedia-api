@@ -4,7 +4,7 @@ defmodule BJJ.Categories.Subposition do
 
   schema "subpositions" do
     field :name, :string
-    belongs_to(:positions, BJJ.Categories.Position)
+    belongs_to(:position, BJJ.Categories.Position)
 
   end
 

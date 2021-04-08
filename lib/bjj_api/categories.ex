@@ -115,6 +115,7 @@ defmodule BJJ.Categories do
   """
   def list_subpositions do
     Repo.all(Subposition)
+    |> Repo.preload([:position])
   end
 
   @doc """
@@ -131,8 +132,9 @@ defmodule BJJ.Categories do
       ** (Ecto.NoResultsError)
 
   """
-  def get_subposition!(id), do: Repo.get!(Subposition, id)
-
+  def get_subposition!(id) do
+    Repo.get!(Subposition, id)
+  end
   @doc """
   Creates a subposition.
 

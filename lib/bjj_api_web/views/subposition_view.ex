@@ -13,7 +13,7 @@ defmodule BJJWeb.SubpositionView do
   def render("subposition.json", %{subposition: subposition}) do
     %{id: subposition.id,
       name: subposition.name,
-      position_id: subposition.position_id,
-      integer: subposition.integer}
+      position_id: subposition.position_id
+  }
   end
 end
