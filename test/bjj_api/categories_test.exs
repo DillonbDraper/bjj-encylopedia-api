@@ -61,4 +61,67 @@ defmodule BJJ.CategoriesTest do
       assert %Ecto.Changeset{} = Categories.change_position(position)
     end
   end
+
+  describe "subpositions" do
+    alias BJJ.Categories.Subposition
+
+    @valid_attrs %{integer: "some integer", name: "some name", position_id: "some position_id"}
+    @update_attrs %{integer: "some updated integer", name: "some updated name", position_id: "some updated position_id"}
+    @invalid_attrs %{integer: nil, name: nil, position_id: nil}
+
+    def subposition_fixture(attrs \\ %{}) do
+      {:ok, subposition} =
+        attrs
+        |> Enum.into(@valid_attrs)
+        |> Categories.create_subposition()
+
+      subposition
+    end
+
+    test "list_subpositions/0 returns all subpositions" do
+      subposition = subposition_fixture()
+      assert Categories.list_subpositions() == [subposition]
+    end
+
+    test "get_subposition!/1 returns the subposition with given id" do
+      subposition = subposition_fixture()
+      assert Categories.get_subposition!(subposition.id) == subposition
+    end
+
+    test "create_subposition/1 with valid data creates a subposition" do
+      assert {:ok, %Subposition{} = subposition} = Categories.create_subposition(@valid_attrs)
+      assert subposition.integer == "some integer"
+      assert subposition.name == "some name"
+      assert subposition.position_id == "some position_id"
+    end
+
+    test "create_subposition/1 with invalid data returns error changeset" do
+      assert {:error, %Ecto.Changeset{}} = Categories.create_subposition(@invalid_attrs)
+    end
+
+    test "update_subposition/2 with valid data updates the subposition" do
+      subposition = subposition_fixture()
+      assert {:ok, %Subposition{} = subposition} = Categories.update_subposition(subposition, @update_attrs)
+      assert subposition.integer == "some updated integer"
+      assert subposition.name == "some updated name"
+      assert subposition.position_id == "some updated position_id"
+    end
+
+    test "update_subposition/2 with invalid data returns error changeset" do
+      subposition = subposition_fixture()
+      assert {:error, %Ecto.Changeset{}} = Categories.update_subposition(subposition, @invalid_attrs)
+      assert subposition == Categories.get_subposition!(subposition.id)
+    end
+
+    test "delete_subposition/1 deletes the subposition" do
+      subposition = subposition_fixture()
+      assert {:ok, %Subposition{}} = Categories.delete_subposition(subposition)
+      assert_raise Ecto.NoResultsError, fn -> Categories.get_subposition!(subposition.id) end
+    end
+
+    test "change_subposition/1 returns a subposition changeset" do
+      subposition = subposition_fixture()
+      assert %Ecto.Changeset{} = Categories.change_subposition(subposition)
+    end
+  end
 end

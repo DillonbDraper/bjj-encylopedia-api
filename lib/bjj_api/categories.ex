@@ -101,4 +101,100 @@ defmodule BJJ.Categories do
   def change_position(%Position{} = position, attrs \\ %{}) do
     Position.changeset(position, attrs)
   end
+
+  alias BJJ.Categories.Subposition
+
+  @doc """
+  Returns the list of subpositions.
+
+  ## Examples
+
+      iex> list_subpositions()
+      [%Subposition{}, ...]
+
+  """
+  def list_subpositions do
+    Repo.all(Subposition)
+  end
+
+  @doc """
+  Gets a single subposition.
+
+  Raises `Ecto.NoResultsError` if the Subposition does not exist.
+
+  ## Examples
+
+      iex> get_subposition!(123)
+      %Subposition{}
+
+      iex> get_subposition!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_subposition!(id), do: Repo.get!(Subposition, id)
+
+  @doc """
+  Creates a subposition.
+
+  ## Examples
+
+      iex> create_subposition(%{field: value})
+      {:ok, %Subposition{}}
+
+      iex> create_subposition(%{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def create_subposition(attrs \\ %{}) do
+    %Subposition{}
+    |> Subposition.changeset(attrs)
+    |> Repo.insert()
+  end
+
+  @doc """
+  Updates a subposition.
+
+  ## Examples
+
+      iex> update_subposition(subposition, %{field: new_value})
+      {:ok, %Subposition{}}
+
+      iex> update_subposition(subposition, %{field: bad_value})
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def update_subposition(%Subposition{} = subposition, attrs) do
+    subposition
+    |> Subposition.changeset(attrs)
+    |> Repo.update()
+  end
+
+  @doc """
+  Deletes a subposition.
+
+  ## Examples
+
+      iex> delete_subposition(subposition)
+      {:ok, %Subposition{}}
+
+      iex> delete_subposition(subposition)
+      {:error, %Ecto.Changeset{}}
+
+  """
+  def delete_subposition(%Subposition{} = subposition) do
+    Repo.delete(subposition)
+  end
+
+  @doc """
+  Returns an `%Ecto.Changeset{}` for tracking subposition changes.
+
+  ## Examples
+
+      iex> change_subposition(subposition)
+      %Ecto.Changeset{data: %Subposition{}}
+
+  """
+  def change_subposition(%Subposition{} = subposition, attrs \\ %{}) do
+    Subposition.changeset(subposition, attrs)
+  end
 end

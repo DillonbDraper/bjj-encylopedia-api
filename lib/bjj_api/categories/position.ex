@@ -4,6 +4,7 @@ defmodule BJJ.Categories.Position do
 
   schema "positions" do
     field :name, :string
+    has_many(:subpositions, BJJ.Categories.Subposition)
 
   end
 
