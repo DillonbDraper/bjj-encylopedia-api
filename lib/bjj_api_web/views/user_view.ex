@@ -14,16 +14,15 @@ defmodule BJJWeb.UserView do
     %{id: user.id, email: user.email, is_staff: user.is_staff}
   end
 
-    def render("sign_in.json", %{user: user}) do
-      %{
-        data: %{
-          user: %{
-            id: user.id,
-            email: user.email,
-            is_staff: user.is_staff
-          }
+  def render("sign_in.json", %{user: user}) do
+    %{
+      data: %{
+        user: %{
+          id: user.id,
+          email: user.email,
+          is_staff: user.is_staff
         }
       }
-
+    }
   end
 end
