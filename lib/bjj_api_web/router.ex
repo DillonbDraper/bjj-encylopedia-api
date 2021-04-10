@@ -11,6 +11,7 @@ defmodule BJJWeb.Router do
     resources "/positions", PositionController, except: [:new, :edit]
     resources "/subpositions", SubpositionController, except: [:new, :edit]
     resources "/techniques", TechniqueController, except: [:new, :edit]
+    resources "/videos", VideoController, except: [:new, :edit]
     post "/users/sign_in", UserController, :sign_in
 
   end
