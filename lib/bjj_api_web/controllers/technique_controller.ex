@@ -7,8 +7,17 @@ defmodule BJJWeb.TechniqueController do
   action_fallback BJJWeb.FallbackController
 
   def index(conn, _params) do
-    techniques = Techniques.list_techniques()
-    render(conn, "index.json", techniques: techniques)
+    query_params = conn.query_params
+
+    if query_params == %{} do
+      techniques = Techniques.list_techniques()
+      render(conn, "index.json", techniques: techniques)
+    else
+      final_params = Map.new(query_params, fn {k, v} -> {String.to_atom(k), v} end)
+
+      techniques = Techniques.list_techniques_with_params(final_params)
+      render(conn, "index.json", techniques: techniques)
+    end
   end
 
   def create(conn, %{"technique" => technique_params}) do
@@ -28,7 +37,8 @@ defmodule BJJWeb.TechniqueController do
   def update(conn, %{"id" => id, "technique" => technique_params}) do
     technique = Techniques.get_technique!(id)
 
-    with {:ok, %Technique{} = technique} <- Techniques.update_technique(technique, technique_params) do
+    with {:ok, %Technique{} = technique} <-
+           Techniques.update_technique(technique, technique_params) do
       render(conn, "show.json", technique: technique)
     end
   end

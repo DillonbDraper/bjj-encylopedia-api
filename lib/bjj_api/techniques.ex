@@ -21,6 +21,48 @@ defmodule BJJ.Techniques do
     Repo.all(Technique)
   end
 
+  def list_techniques_with_params(params) do
+    Technique
+    |> position_filter(params)
+    |> subposition_filter(params)
+    |> orientation_filter(params)
+    |> Repo.all()
+
+  end
+
+    defp position_filter(query, opts) do
+    case Map.fetch(opts, :position) do
+      {:ok, position} ->
+        position_int = String.to_integer(position)
+        where(query, [t], t.position_id == ^position_int)
+      :error ->
+        query
+     end
+  end
+
+  defp subposition_filter(query, opts) do
+    case Map.fetch(opts, :subposition) do
+      {:ok, subposition} ->
+        subposition_int = String.to_integer(subposition)
+
+        where(query, [t], t.subposition_id == ^subposition_int)
+      :error ->
+        query
+     end
+  end
+
+  defp orientation_filter(query, opts) do
+    case Map.fetch(opts, :orientation) do
+      {:ok, orientation} ->
+        orientation_int = String.to_integer(orientation)
+        where(query, [t], t.orientation_id == ^orientation_int)
+      :error ->
+        query
+     end
+  end
+
+
+
   @doc """
   Gets a single technique.
 
