@@ -21,6 +21,20 @@ defmodule BJJ.Notes do
     Repo.all(Note)
   end
 
+  def criteria_matched_notes(params) do
+    video_num = params.video |> String.to_integer
+
+    user_num = params.user |> String.to_integer
+
+    from(n in Note,
+    where: n.user_id == ^user_num and n.video_id == ^video_num,
+    select: n)
+
+    |> Repo.all
+
+
+  end
+
   @doc """
   Gets a single note.
 

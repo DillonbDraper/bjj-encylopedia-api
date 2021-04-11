@@ -7,8 +7,16 @@ defmodule BJJWeb.NoteController do
   action_fallback BJJWeb.FallbackController
 
   def index(conn, _params) do
+    if conn.query_params == %{} do
+
     notes = Notes.list_notes()
     render(conn, "index.json", notes: notes)
+    else
+      final_params = Map.new(conn.query_params, fn {k, v} -> {String.to_atom(k), v} end)
+
+      notes = Notes.criteria_matched_notes(final_params)
+      render(conn, "index.json", notes: notes)
+    end
   end
 
   def create(conn, %{"note" => note_params}) do

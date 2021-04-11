@@ -306,4 +306,9 @@ www.fujimats.com - 10% OFF Coupon Code: FARIAMAT10
 http://bernardofaria.com
 https://www.facebook.com/bernardofariabjj/
 https://www.instagram.com/bernardofariabjj/
-https://twitter.com/bernardofariajj',4,'False')
+https://twitter.com/bernardofariajj',4,'False');
+
+INSERT INTO "notes" VALUES
+    (1,'I am an important part',73,1,1),
+    (2,'asdf',13,1,10),
+    (3,'This is important!',74,2,1);
